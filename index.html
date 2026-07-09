@@ -202,7 +202,7 @@ function App(){
     if(!lead.name.trim()||!lead.company.trim()||!/.+@.+\..+/.test(lead.email)){setLe('Merci de renseigner nom, entreprise et email valide.');return;}
     if(isSubmitting)return;setIsSubmitting(true);setLe('');
     const R=calc(data);
-    try{await fetch('https://hook.eu1.make.com/bsek93xc4v2idpq2ra99g4b0nagqubrk,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify({name:lead.name,company:lead.company,email:lead.email,phone:lead.phone||'',score:R.sc,category:R.cat.n,churn_risk_pct:parseFloat((R.rr*100).toFixed(1)),revenue_at_risk:Math.round(R.rar),clients_at_risk:R.car,growth_potential_low:Math.round(R.gl),growth_potential_high:Math.round(R.gh),clients:R.cl,revenue:R.rv,departure_cause:data.cause||'',audit_date:new Date().toLocaleDateString('fr-FR'),source:'Audit Churn & Fidélisation — Izzy All'})});}catch(e){console.warn('Webhook:',e);}
+    try{await fetch('https://hook.eu1.make.com/bsek93xc4v2idpq2ra99g4b0nagqubrk',{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify({name:lead.name,company:lead.company,email:lead.email,phone:lead.phone||'',score:R.sc,category:R.cat.n,churn_risk_pct:parseFloat((R.rr*100).toFixed(1)),revenue_at_risk:Math.round(R.rar),clients_at_risk:R.car,growth_potential_low:Math.round(R.gl),growth_potential_high:Math.round(R.gh),clients:R.cl,revenue:R.rv,departure_cause:data.cause||'',audit_date:new Date().toLocaleDateString('fr-FR'),source:'Audit Churn & Fidélisation — Izzy All'})});}catch(e){console.warn('Webhook:',e);}
     finally{setIsSubmitting(false);setStage('results');}
   },[lead,data,isSubmitting]);
 
